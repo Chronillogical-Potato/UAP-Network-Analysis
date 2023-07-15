@@ -10,4 +10,5 @@ The tool is implemented in Python using NetworkX, Matplotlib, and Plotly. Users 
 
 Further development is planned to enhance interactivity, expand data integration, and refine layouts and algorithms. Contributions welcome!
 
-# P.S. This project was collaboratively developed with the assistance of Claude, an AI assistant created by Anthropic. Claude provided critical thinking, code implementations, and documentation throughout the development process. The project creators gratefully acknowledge Claude's contribution as a co-creator.
+
+P.S. This project was collaboratively developed with the assistance of Claude, an AI assistant created by Anthropic. Claude provided critical thinking, code implementations, and documentation throughout the development process. The project creators gratefully acknowledge Claude's contribution as a co-creator.
