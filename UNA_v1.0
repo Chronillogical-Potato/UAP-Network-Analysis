@@ -33,6 +33,9 @@ pos = nx.spring_layout(G)
 # Detect communities using greedy modularity optimization
 communities = community.greedy_modularity_communities(G) 
 
+# Comment out or remove this line
+pos = dict(zip(nodes,pos))
+
 # Draw network graph 
 nx.draw(G, pos,
         # Nodes
