@@ -2,6 +2,7 @@
 import networkx as nx 
 import matplotlib.pyplot as plt
 from networkx.algorithms import community
+import seaborn as sns
 
 # Create node list 
 nodes = ["Government", "Military", "Scientific Community", "Corporations", "Media", "Public"] 
@@ -33,21 +34,36 @@ pos = nx.spring_layout(G)
 # Detect communities using greedy modularity optimization
 communities = community.greedy_modularity_communities(G) 
 
-# Comment out or remove this line
-pos = dict(zip(nodes,pos))
+# Create a color map
+color_map = {}
+for i, community in enumerate(communities):
+    for node in community:
+        color_map[node] = i
+
+# Use the color map to assign colors to nodes
+node_color = [color_map[node] for node in G.nodes]
+
+# Set color palette
+color_palette = sns.color_palette("husl", len(communities))
 
 # Draw network graph 
 nx.draw(G, pos,
         # Nodes
         node_size=800, 
         nodelist=nodes,
-        node_color=list(communities),
-      
+        node_color=node_color,  
+        cmap=plt.get_cmap('jet'), 
+        node_shape="o",
+        alpha=0.8,
+        linewidths=1,
         # Edges 
+        edgelist=edges,
         width=list(nx.get_edge_attributes(G,'weight').values()),
-      
+        edge_color="gray",
         # Graph 
-        with_labels=True)
+        with_labels=True,
+        font_weight='bold',
+        font_color='black')
 
 # Show plot
 plt.show()
