@@ -1,0 +1,50 @@
+# Import network, visualization, and community detection libraries
+import networkx as nx 
+import matplotlib.pyplot as plt
+from networkx.algorithms import community
+
+# Create node list 
+nodes = ["Government", "Military", "Scientific Community", "Corporations", "Media", "Public"] 
+
+# Create weighted edge list based on assessed relationship strengths
+# Format: (Node 1, Node 2, weight)
+edges = [
+    ("Government", "Military", 0.9), 
+    ("Government", "Scientific Community", 0.8),
+    ("Government", "Corporations", 0.7),
+    ("Government", "Media", 0.6),
+    ("Military", "Corporations", 0.8),
+    ("Scientific Community", "Corporations", 0.7), 
+    ("Scientific Community", "Public", 0.8),
+    ("Corporations", "Media", 0.8),
+    ("Media", "Public", 0.9)
+]
+
+# Initialize network graph object
+G = nx.Graph()
+
+# Add nodes and edge list to graph 
+G.add_nodes_from(nodes)
+G.add_weighted_edges_from(edges)
+
+# Run spring layout algorithm to position nodes
+pos = nx.spring_layout(G)
+
+# Detect communities using greedy modularity optimization
+communities = community.greedy_modularity_communities(G) 
+
+# Draw network graph 
+nx.draw(G, pos,
+        # Nodes
+        node_size=800, 
+        nodelist=nodes,
+        node_color=list(communities),
+      
+        # Edges 
+        width=list(nx.get_edge_attributes(G,'weight').values()),
+      
+        # Graph 
+        with_labels=True)
+
+# Show plot
+plt.show()
